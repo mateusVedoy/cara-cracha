@@ -3,7 +3,7 @@ export class Token {
     private hash: string;
     private expiresIn: string;
 
-    public constructor(hash: string, expiresIn: string){
+    public constructor(hash: string, expiresIn: string) {
         this.hash = hash;
         this.expiresIn = expiresIn;
     }
