@@ -8,6 +8,6 @@ RUN npm i
 
 COPY . .
 
-EXPOSE 2022
+EXPOSE 3001
 
 CMD ["npm", "run", "dev"]
