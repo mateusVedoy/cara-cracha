@@ -3,4 +3,4 @@ import { createTokenRouter } from "./CreateTokenRouter";
 
 export const router = Router();
 
-router.use("/create", createTokenRouter);
+router.use("/token", createTokenRouter);
