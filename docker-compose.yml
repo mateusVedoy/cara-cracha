@@ -8,3 +8,16 @@ services:
       - 3001:3001
     volumes:
       - .:/usr/app
+    depends_on:
+      - db
+    db:
+      image: "postgres:latest"
+      restart: always
+      environment:
+        POSTGRES_USER: cara-cracha
+        POSTGRES_PASSWORD: cara-cracha
+        POSTGRES_DB: cara-cracha
+      volumes:
+        - ./pgdata:/var/lib/postgresql/data
+      ports:
+        - "4321:5432"
