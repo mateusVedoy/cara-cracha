@@ -1,5 +1,5 @@
 import { User } from "../../../domain/User";
 
-export interface ICreateUser {
+export interface ICreateUserService {
     create(login: string, pass: string): User;
 }
