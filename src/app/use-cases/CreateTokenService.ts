@@ -12,12 +12,7 @@ export class CreateTokenService implements ICreateTokenService{
     }
 
     public create(pass: string, login: string): Token {
-        const createdToken = this.createTokenHelperCaller(pass, login);
-        const expiresIn =  this.JWTTOKENEXPIRESIN;
-        return new Token(createdToken, expiresIn);
-    }
-    
-    private createTokenHelperCaller(pass: string, login: string): string {
-        return this.TokenGen.create(pass, login);
+        const createdToken = this.TokenGen.create(pass, login);
+        return new Token(createdToken, this.JWTTOKENEXPIRESIN);
     }
 }
