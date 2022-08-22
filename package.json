@@ -5,8 +5,7 @@
   "main": "Server.ts",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/Server.ts",
-    "test": "jest",
-    "teste": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/domain/Token.ts"
+    "test": "jest"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

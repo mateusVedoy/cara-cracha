@@ -5,7 +5,7 @@ import { Token } from "../../domain/Token";
 export class CreateTokenService implements ICreateTokenService{
 
     private TokenGen: ICreateTokenHelper;
-    private JWTTOKENEXPIRESIN: string = process.env.JWTEXPIRESIN || "30 minutes";
+    private JWTTOKENEXPIRESIN: string = process.env.JWTEXPIRESIN || "1800000";
 
     public constructor(tokenGen: ICreateTokenHelper) {
         this.TokenGen = tokenGen;
