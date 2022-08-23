@@ -10,9 +10,9 @@ export class CreateTokenController implements IController {
         this.CreateTokenService = createToken;
     }
 
-    public handle(req: Request, res: Response): Response {
+    public async handle(req: Request, res: Response): Promise<Response> {
         const { pass, login } = req.body;
-        const token = this.CreateTokenService.create(pass, login);
+        const token = await this.CreateTokenService.create(pass, login);
         return res.status(201).send({
             "access_token":token.getHash(),
             "created_at": token.getCreatedAt(),
