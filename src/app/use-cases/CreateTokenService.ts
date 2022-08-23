@@ -16,7 +16,7 @@ export class CreateTokenService implements ICreateTokenService{
 
     public async create(pass: string, login: string): Promise<Token> {
         const hashedPass = await this.hashTokenPass(pass);
-        const createdToken = this.TokenGen.create(hashedPass, login);
+        const createdToken = this.createTokenHash(hashedPass, login);
         return new Token(createdToken, this.JWTTOKENEXPIRESIN);
     }
 
@@ -26,5 +26,9 @@ export class CreateTokenService implements ICreateTokenService{
         } catch (error) {
             throw error;
         }
+    }
+
+    private createTokenHash(hashedPass: string, login: string): string {
+        return this.TokenGen.create(hashedPass, login);
     }
 }
