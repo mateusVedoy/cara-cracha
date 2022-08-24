@@ -4,12 +4,14 @@ export class Token {
     private createdAt: string;
     private expiresIn: string;
     private lifetime: string;
+    private secretKey: string;
 
-    public constructor(hash: string, lifetime: string) {
+    public constructor(hash: string, lifetime: string, key: string) {
         this.hash = hash;
         this.createdAt = this.dateFormat();
         this.expiresIn = this.dateFormat(this.expiresInCalculate(lifetime))
         this.lifetime = lifetime;
+        this.secretKey = key;
     }
 
     public getHash(): string {
@@ -27,6 +29,11 @@ export class Token {
     public getLifetime(): string {
         return this.lifetime;
     }
+
+    public getSecretKey(): string {
+        return this.secretKey;
+    }
+
 
     private dateFormat(optDate:Date = new Date()): string {
         const date = optDate;

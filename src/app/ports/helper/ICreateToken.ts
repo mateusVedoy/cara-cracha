@@ -1,3 +1,3 @@
 export interface ICreateTokenHelper {
-    create(pass: string, login: string): string;
+    create(pass: string, login: string, key: string): string;
 }
