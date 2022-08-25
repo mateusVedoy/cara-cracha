@@ -15,6 +15,7 @@ export class CreateTokenController implements IController {
         const token = await this.CreateTokenService.create(pass, login);
         return res.status(201).send({
             "access_token":token.getHash(),
+            "key": token.getSecretKey(),
             "created_at": token.getCreatedAt(),
             "expires_in": token.getExpiresIn()
         })
