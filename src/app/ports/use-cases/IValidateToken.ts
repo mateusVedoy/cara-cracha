@@ -1,3 +1,3 @@
 export interface IValidateToken {
-    validate(token: string, key: string): Boolean;
+    validate(token: string, key: string): Promise<Boolean>;
 }
