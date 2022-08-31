@@ -6,18 +6,18 @@ import { createTokenService, spyHelper, spyPassHash } from "../shared/Ceate-Toke
 describe("Create Token use case", () => {
 
     let JWTToken: Token;
+    let data: Object = {login: 'mgoes', pass: '123456'}
 
     beforeEach(async () => {
-        JWTToken = await createTokenService.create('123456', 'mgoes');
+        JWTToken = await createTokenService.create(data);
     });
 
     it("should create a token with the same data that was passed as args", async () => {
         const tokenPayload = JSON.parse(JSON.stringify(jwt.decode(JWTToken.getHash())))
         const secret = JWTToken.getSecretKey();
-        const { login, pass, key } = tokenPayload;
-        expect(await bcrjs.compare('123456', pass)).toBeTruthy();
+        const { props , key } = tokenPayload;
         expect(await bcrjs.compare(secret, key)).toBeTruthy();
-        expect(login).toBe('mgoes');
+        expect(props).toMatchObject(data);
 
     });
 
@@ -25,9 +25,8 @@ describe("Create Token use case", () => {
         expect(JWTToken).toBeInstanceOf(Token);
     });
 
-    it("should contain pass, login and key properties", () => {
-        expect(jwt.decode(JWTToken.getHash())).toHaveProperty('pass');
-        expect(jwt.decode(JWTToken.getHash())).toHaveProperty('login');
+    it("should contain props and key properties", () => {
+        expect(jwt.decode(JWTToken.getHash())).toHaveProperty('props');
         expect(jwt.decode(JWTToken.getHash())).toHaveProperty('key');
     });
 
@@ -35,8 +34,8 @@ describe("Create Token use case", () => {
         expect(spyHelper).toHaveBeenCalledTimes(1);
     });
 
-    it("should call pass hasher helper twice", () => {
-        expect(spyPassHash).toHaveBeenCalledTimes(2);
+    it("should call pass hasher helper once", () => {
+        expect(spyPassHash).toHaveBeenCalledTimes(1);
     });
 
 });
