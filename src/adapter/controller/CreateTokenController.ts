@@ -17,11 +17,12 @@ export class CreateTokenController implements IController {
         try {
             const { pass, login } = req.body;
 
-            const moveOn = this.EmptyPropsValidation.isEmpty(pass, login);
+            const moveOn = this.EmptyPropsValidation.isEmpty(req.body);
             
             if (!moveOn) return res.status(400).send({ "Message": "Required fields are empty" });
 
-            const token = await this.CreateTokenService.create(pass, login);
+            //modificar aqui
+            const token = await this.CreateTokenService.create(req.body);
 
             const modelResponse = this.handleModelResponse(token.getHash(), token.getSecretKey(), token.getCreatedAt(), token.getExpiresIn());
 

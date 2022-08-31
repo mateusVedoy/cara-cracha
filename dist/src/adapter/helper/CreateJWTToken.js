@@ -8,10 +8,9 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const SECRET = process.env.JWTSECRET || "$1$YhiQ/w2L$mmtX.mrwAEARiZOM4C/S00";
 const JWTEXPIRESIN = process.env.JWTEXPRESIN || "30 minutes";
 class CreateJWTToken {
-    create(pass, login, key) {
+    create(props, key) {
         return jsonwebtoken_1.default.sign({
-            pass: pass,
-            login: login,
+            props,
             key: key
         }, SECRET, {
             "expiresIn": JWTEXPIRESIN

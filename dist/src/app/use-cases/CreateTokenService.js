@@ -18,12 +18,11 @@ class CreateTokenService {
         this.PassHasher = passHash;
         this.KeyGen = keyGen;
     }
-    create(pass, login) {
+    create(props) {
         return __awaiter(this, void 0, void 0, function* () {
-            const hashedPass = yield this.hashTokenProps(pass);
             const key = this.KeyGen.generateKey();
             const hashedKey = yield this.hashTokenProps(key);
-            const createdToken = this.createTokenHash(hashedPass, login, hashedKey);
+            const createdToken = this.createTokenHash(props, hashedKey);
             return new Token_1.Token(createdToken, this.JWTTOKENEXPIRESIN, key);
         });
     }
@@ -37,8 +36,8 @@ class CreateTokenService {
             }
         });
     }
-    createTokenHash(hashedPass, login, key) {
-        return this.TokenGen.create(hashedPass, login, key);
+    createTokenHash(props, key) {
+        return this.TokenGen.create(props, key);
     }
 }
 exports.CreateTokenService = CreateTokenService;

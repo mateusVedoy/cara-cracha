@@ -19,10 +19,11 @@ class CreateTokenController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { pass, login } = req.body;
-                const moveOn = this.EmptyPropsValidation.isEmpty(pass, login);
+                const moveOn = this.EmptyPropsValidation.isEmpty(req.body);
                 if (!moveOn)
                     return res.status(400).send({ "Message": "Required fields are empty" });
-                const token = yield this.CreateTokenService.create(pass, login);
+                //modificar aqui
+                const token = yield this.CreateTokenService.create(req.body);
                 const modelResponse = this.handleModelResponse(token.getHash(), token.getSecretKey(), token.getCreatedAt(), token.getExpiresIn());
                 return res.status(201).send(modelResponse);
             }

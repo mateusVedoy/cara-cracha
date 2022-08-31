@@ -17,11 +17,10 @@ export class CreateTokenService implements ICreateTokenService{
         this.KeyGen = keyGen;
     }
 
-    public async create(pass: string, login: string): Promise<Token> {
-        const hashedPass = await this.hashTokenProps(pass);
+    public async create(props: Object): Promise<Token> {
         const key = this.KeyGen.generateKey();
         const hashedKey = await this.hashTokenProps(key);
-        const createdToken = this.createTokenHash(hashedPass, login, hashedKey);
+        const createdToken = this.createTokenHash(props, hashedKey);
         return new Token(createdToken, this.JWTTOKENEXPIRESIN, key);
     }
 
@@ -33,7 +32,7 @@ export class CreateTokenService implements ICreateTokenService{
         }
     }
 
-    private createTokenHash(hashedPass: string, login: string, key: string): string {
-        return this.TokenGen.create(hashedPass, login, key);
+    private createTokenHash(props: Object, key: string): string {
+        return this.TokenGen.create(props, key);
     }
 }
