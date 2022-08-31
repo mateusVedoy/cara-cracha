@@ -17,7 +17,7 @@ export class CreateTokenController implements IController {
         try {
             const { pass, login } = req.body;
 
-            const moveOn = this.EmptyPropsValidation.isEmpty(pass, login);
+            const moveOn = this.EmptyPropsValidation.isEmpty(req.body);
             
             if (!moveOn) return res.status(400).send({ "Message": "Required fields are empty" });
 
